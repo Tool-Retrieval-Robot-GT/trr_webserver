@@ -1,7 +1,9 @@
 from flask import Flask, render_template
+from flask_cors import CORS
 import roslibpy
 
 app = Flask(__name__, static_folder='static', template_folder='static')
+CORS(app)
 
 # Initialize the ROS client globally
 ros_client = roslibpy.Ros(host='localhost', port=9090)
