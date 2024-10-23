@@ -10,9 +10,15 @@ ros_client = roslibpy.Ros(host='localhost', port=9090)
 
 # Push app context and connect to ROS
 with app.app_context():
-    if not ros_client.is_connected:
-        ros_client.run()
-        print('ROS connected:', ros_client.is_connected)
+    try:
+        print("Connecting to ROS...")
+        ros_client.run(timeout=2)
+        if ros_client.is_connected:
+            print('ROS connected successfully.')
+        else:
+            print('Failed to connect to ROS.')
+    except Exception as e:
+        print(f'Error connecting to ROS: {e}')
 
 @app.route('/')
 def index():
