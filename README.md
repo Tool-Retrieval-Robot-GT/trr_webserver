@@ -1,15 +1,19 @@
 # trr_webserver
 
+## Prerequisites
+* Python (3.10+)
+* NodeJS
+
 ## Initial Install
 To the create the python virtual environment to run the flask backend, run:
 ```
 cd backend
 python -m venv venv
 
-# For linux
+# For Linux
 source venv/bin/activate
 
-# For windows
+# For Windows
 .\venv\Scripts\activate
 
 pip install -r requirements.txt
@@ -27,13 +31,13 @@ npm install
 ```
 cd backend
 
-# For linux
+# For Linux
 source venv/bin/activate
 
-# For windows
+# For Windows
 .\venv\Scripts\activate
 
-flask --app server.py run
+flask --app app run --debug
 ```
 The IP address listed is the address of the backend
 
