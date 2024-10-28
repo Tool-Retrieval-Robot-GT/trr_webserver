@@ -1,17 +1,22 @@
-from flask import Blueprint, jsonify
-from src import ros, get_map
-import roslibpy
+from flask import Blueprint
 import numpy as np
 from PIL import Image, ImageOps 
 import base64
 import io
-import json
+
+from src.services.ros_client import ros_client
 
 test = Blueprint("test", __name__)
 
-@test.route('/hello', methods = ["GET"])
-def handle_test():
-    latest_map = get_map()
+latest_map = {"data": "No map received yet."}
+def ros_map_callback(message):
+    global latest_map
+    latest_map = message
+ros_client.setup_subscriber('/map', 'nav_msgs/OccupancyGrid', ros_map_callback)
+
+@test.route('/map', methods = ["GET"])
+def send_map():
+    global latest_map
     width = latest_map['info']['width']
     height = latest_map['info']['height']
     
