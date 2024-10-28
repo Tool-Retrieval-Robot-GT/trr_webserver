@@ -1,0 +1,19 @@
+.tool-creator {
+    position: fixed; /* Use fixed positioning to center it on the screen */
+    top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); /* Center it */
+    background-color: white; /* Background color of the window */
+    border: 1px solid #ccc; /* Border for the window */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 20px; /* Space inside the window */
+    z-index: 1000; /* Make sure it appears on top */
+    transition: opacity 0.3s ease; /* Transition effect for visibility */
+    opacity: 0; /* Start as invisible */
+}
+
+/* Class to make the window visible */
+.tool-creator.visible {
+    opacity: 1; /* Fully visible */
+}
