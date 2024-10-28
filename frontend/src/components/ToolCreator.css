@@ -1,3 +1,20 @@
+.overlay {
+    position: fixed; /* Fixed position to cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover full width */
+    height: 100%; /* Cover full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black for grayed effect */
+    z-index: 900; /* Below the tool creator but above other content */
+    display: none;
+    transition: opacity 0.3s ease; /* Transition effect for visibility */
+}
+
+/* Class to make the overlay visible */
+.overlay.visible {
+    display: block;
+}
+
 .tool-creator {
     position: fixed; /* Use fixed positioning to center it on the screen */
     top: 50%; /* Position from the top */

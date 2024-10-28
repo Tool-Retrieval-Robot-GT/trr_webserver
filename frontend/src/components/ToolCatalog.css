@@ -1,5 +1,12 @@
 .tool-catalog {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 20px
+}
+
+.create-tool-button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
 }
