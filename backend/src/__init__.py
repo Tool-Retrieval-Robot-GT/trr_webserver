@@ -10,7 +10,7 @@ app = Flask(__name__, static_folder='../static', template_folder='../static')
 CORS(app)
 
 # Initialize the ROS client
-ros = roslibpy.Ros(host='143.215.52.14', port=9090)
+ros = roslibpy.Ros(host='143.215.53.172', port=9090)
 
 # Attempt to connect to ROS instance
 try:

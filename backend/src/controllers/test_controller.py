@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image, ImageOps 
 import base64
 import io
+import json
 
 test = Blueprint("test", __name__)
 
@@ -40,5 +41,7 @@ def handle_test():
     # Encode the image to base64
     img_str = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
-    return img_str
+    img = {'img': img_str, 'width': pil_img.width, 'height': pil_img.height }
+
+    return img
 

@@ -48,3 +48,8 @@ cd frontend
 npm run dev
 ```
 The IP address listed is the address of the frontend
+
+### Launching ROSBridge Server:
+```
+ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+```
