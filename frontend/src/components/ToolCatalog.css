@@ -6,6 +6,16 @@
     gap: 20px;
     height: 100%;
     padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.tool-catalog::after {
+    content: ''; /* Creates a virtual element at the end */
+    display: block;
+    height: 1px; /* Extra space at the bottom */
+    flex-shrink: 0; /* Ensures it doesn’t collapse */
+    width: 100%;
 }
 
 .create-tool-button {
