@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 import numpy as np
 from PIL import Image, ImageOps 
 import base64
@@ -6,7 +6,7 @@ import io
 
 from src.services.ros_client import ros_client
 
-test = Blueprint("test", __name__)
+map = Blueprint("test", __name__)
 
 latest_map = {"data": "No map received yet."}
 def ros_map_callback(message):
@@ -14,7 +14,7 @@ def ros_map_callback(message):
     latest_map = message
 ros_client.setup_subscriber('/map', 'nav_msgs/OccupancyGrid', ros_map_callback)
 
-@test.route('/map', methods = ["GET"])
+@map.route('/image', methods = ["GET"])
 def send_map():
     global latest_map
     width = latest_map['info']['width']
@@ -49,4 +49,9 @@ def send_map():
     img = {'img': img_str, 'width': pil_img.width, 'height': pil_img.height }
 
     return img
+
+@map.route('/position', methods = ["POST"])
+def position():
+    print(request.get_json())
+    return "nice"
 

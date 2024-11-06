@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 
-function FactoryMap() {
+function FactoryMap({ currCoordinates }) {
     const [image, setImage] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -12,7 +12,7 @@ function FactoryMap() {
         const fetchImage = async () => {
             try {
                 let response = await axios.get(
-                    "http://127.0.0.1:5000/api/test/map"
+                    "http://127.0.0.1:5000/api/map/image"
                 );
                 setImage(response.data);
             } catch (err) {
@@ -58,8 +58,8 @@ function FactoryMap() {
     ];
 
     const handleMarkerClick = (id) => {
-        console.log("Clicked");
         setSelectedMarker(id);
+        currCoordinates(waypoints.find(waypoint => waypoint.id === id).position);
     };
 
     return (
