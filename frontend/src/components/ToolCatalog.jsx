@@ -3,6 +3,7 @@ import axios from "axios";
 
 import "./ToolCatalog.css";
 import BaseLayout from "../layouts/BaseLayout";
+import PopUp from "../layouts/PopUp";
 
 // Array of input configurations
 const inputFields = [
@@ -13,7 +14,6 @@ const inputFields = [
 ];
 
 function ToolCreator({ isVisible, onClose, onCreate }) {
-    // Create refs for each input
     const inputRefs = useRef(inputFields.reduce((acc, field) => {
         acc[field.name] = React.createRef(); // Initialize a ref for each input field
         return acc;
@@ -41,32 +41,26 @@ function ToolCreator({ isVisible, onClose, onCreate }) {
     };
 
     return (
-        <>
-            {/* Backdrop overlay */}
-            <div className={`overlay ${isVisible ? "visible" : ""}`}></div>
-
-            {/* Tool Creator window */}
-            <div className={`tool-creator ${isVisible ? "visible" : ""}`}>
-                <table>
-                    <tbody>
-                        {inputFields.map((field) => (
-                            <tr key={field.name}>
-                                <td>{field.label}</td>
-                                <td>
-                                    <input
-                                        type={field.type}
-                                        name={field.name} // Use field name as input name
-                                        ref={inputRefs.current[field.name]} // Attach ref to input
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <button onClick={submitTool}>Submit</button>
-                <button onClick={onClose}>Close</button>
-            </div>
-        </>
+        <PopUp isVisible={isVisible}>
+            <table>
+                <tbody>
+                    {inputFields.map((field) => (
+                        <tr key={field.name}>
+                            <td>{field.label}</td>
+                            <td>
+                                <input
+                                    type={field.type}
+                                    name={field.name} // Use field name as input name
+                                    ref={inputRefs.current[field.name]} // Attach ref to input
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <button onClick={submitTool}>Submit</button>
+            <button onClick={onClose}>Close</button>
+        </PopUp>  
     );
 }
 

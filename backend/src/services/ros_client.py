@@ -51,7 +51,7 @@ class RosClient:
             print("Disconnected from ROS.")
 
 # Create a reusable instance for your backend
-ros_client = RosClient(host='143.215.53.172', port=9090)
+ros_client = RosClient(host='143.215.51.67', port=9090)
 
 # Close the ROS instance when the app shuts down
 atexit.register(ros_client.close)

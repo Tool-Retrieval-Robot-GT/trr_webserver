@@ -28,7 +28,7 @@ function FactoryMap() {
     ];
 
     return (
-        <BaseLayout>
+        <>
             {image == null ? (
                 <h1>Fetching image</h1>
             ) : (
@@ -47,7 +47,7 @@ function FactoryMap() {
                     />
                 </MapContainer>
             )}
-        </BaseLayout>
+        </>
     );
 }
 

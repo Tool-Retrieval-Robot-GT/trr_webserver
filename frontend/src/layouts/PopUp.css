@@ -1,0 +1,40 @@
+.popup-overlay {
+    position: fixed; /* Fixed position to cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover full width */
+    height: 100%; /* Cover full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black for grayed effect */
+    z-index: 900; /* Below the tool creator but above other content */
+    transition: opacity 0.3s ease; /* Transition effect for visibility */
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Class to make the overlay visible */
+.popup-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    position: fixed; /* Use fixed positioning to center it on the screen */
+    top: 50%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); /* Center it */
+    background-color: white; /* Background color of the window */
+    border: 1px solid #ccc; /* Border for the window */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 20px; /* Space inside the window */
+    z-index: 1000; /* Make sure it appears on top */
+    transition: opacity 0.3s ease; /* Transition effect for visibility */
+    opacity: 0; /* Start as invisible */
+    visibility: hidden;
+}
+
+/* Class to make the window visible */
+.popup-content.visible {
+    visibility: visible;
+    opacity: 1; /* Fully visible */
+}
