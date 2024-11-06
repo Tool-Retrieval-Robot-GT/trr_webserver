@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 import "./ToolCatalog.css";
-import BaseLayout from "../layouts/BaseLayout";
+import ToolRequest from "./ToolRequest";
 import PopUp from "../layouts/PopUp";
 
 // Array of input configurations
@@ -64,7 +64,7 @@ function ToolCreator({ isVisible, onClose, onCreate }) {
     );
 }
 
-function ToolDesc({ tool }) {
+function ToolDesc({ tool, isRequesting }) {
     return (
         <div className="card-container">
             <div className="card-header">
@@ -92,7 +92,7 @@ function ToolDesc({ tool }) {
                 </table>
             </div>
             <div className="card-footer">
-                <button className="footer-button">Request</button>
+                <button className="footer-button" onClick={() => isRequesting(tool.name)}>Request</button>
             </div>
         </div>
     );
@@ -100,6 +100,7 @@ function ToolDesc({ tool }) {
 
 function ToolCatalog() {
     const [creating, setCreating] = useState(false);
+    const [requesting, setRequesting] = useState("");
     const [tools, setTools] = useState([]);
 
     const fetchTools = async () => {
@@ -117,24 +118,27 @@ function ToolCatalog() {
     }, []);
 
     return (
-        <BaseLayout>
-            <div className="tool-catalog">
-                <button
-                    className="create-tool-button"
-                    onClick={() => setCreating(true)}
-                >
-                    +
-                </button>
-                <ToolCreator
-                    isVisible={creating}
-                    onClose={() => setCreating(false)}
-                    onCreate={fetchTools}
-                ></ToolCreator>
-                {tools.map((tool, index) => (
-                    <ToolDesc key={index} tool={tool}></ToolDesc>
-                ))}
-            </div>
-        </BaseLayout>
+        <div className="tool-catalog">
+            <button
+                className="create-tool-button"
+                onClick={() => setCreating(true)}
+            >
+                +
+            </button>
+            <ToolCreator
+                isVisible={creating}
+                onClose={() => setCreating(false)}
+                onCreate={fetchTools}
+            />
+            <ToolRequest
+                isVisible={requesting != ""}
+                toolName={requesting}
+                onClose={() => setRequesting("")}
+            />
+            {tools.map((tool, index) => (
+                <ToolDesc key={index} tool={tool} isRequesting={setRequesting}></ToolDesc>
+            ))}
+        </div>
     );
 }
 

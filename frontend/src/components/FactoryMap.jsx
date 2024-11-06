@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MapContainer, ImageOverlay } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
-import BaseLayout from "../layouts/BaseLayout";
 
 function FactoryMap() {
     const [image, setImage] = useState(null);
@@ -24,7 +23,7 @@ function FactoryMap() {
 
     const bounds = [
         [0, 0], // Top-left corner (lat/lng)
-        [image == null ? 0 : image.height, image == null ? 0 :image.width], // Bottom-right corner (lat/lng)
+        [image == null ? 0 : image.height, image == null ? 0 : image.width], // Bottom-right corner (lat/lng)
     ];
 
     return (
@@ -38,8 +37,10 @@ function FactoryMap() {
                     style={{
                         height: `${image.height}px`,
                         width: `${image.width}px`,
-                    }} // Use a simple coordinate system for the image
+                    }}
                     crs={L.CRS.Simple}
+                    maxBounds={bounds} // Restrict map to image bounds
+                    maxBoundsViscosity={1.0} // Fully restrict panning outside bounds
                 >
                     <ImageOverlay
                         url={`data:image/png;base64,${image.img}`}

@@ -1,9 +1,12 @@
 import './App.css';
 import ToolCatalog from './components/ToolCatalog';
+import BaseLayout from './layouts/BaseLayout';
 
 function App() {
   return (
-    <ToolCatalog />
+    <BaseLayout>
+      <ToolCatalog />
+    </BaseLayout>
   );
 }
 
