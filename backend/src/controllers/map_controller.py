@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image, ImageOps 
 import base64
 import io
+from datetime import datetime
 
 from src.services.ros_client import ros_client
 
@@ -13,6 +14,8 @@ def ros_map_callback(message):
     global latest_map
     latest_map = message
 ros_client.setup_subscriber('/map', 'nav_msgs/OccupancyGrid', ros_map_callback)
+
+ros_client.setup_publisher('/goal_pose', 'geometry_msgs/msg/PoseStamped')
 
 @map.route('/image', methods = ["GET"])
 def send_map():
@@ -50,8 +53,34 @@ def send_map():
 
     return img
 
-@map.route('/position', methods = ["POST"])
+@map.route('/goal', methods = ["POST"])
 def position():
-    print(request.get_json())
-    return "nice"
+    global latest_map
+    width = latest_map['info']['width']
+    height = latest_map['info']['height']
 
+    pos = request.get_json()
+    x = ((pos[0] / 5) - (width / 2)) / 20
+    y = ((pos[1] / 5) - (height / 2)) / 20
+
+    print(x, y)
+
+    # Get the current time
+    now = datetime.now()
+
+    # Seconds and nanoseconds
+    secs = int(now.timestamp())
+    nsecs = now.microsecond * 1000  # Convert microseconds to nanoseconds
+    
+    ros_client.publish('/goal_pose', {
+        'header': {
+            'frame_id': 'map',
+            'stamp': {'secs': secs, 'nsecs': nsecs}  # Set the appropriate timestamp as needed
+        },
+        'pose': {
+            'position': {'x': x, 'y': y, 'z': 0.0},
+            'orientation': {'x': 0.0, 'y': 0.0, 'z': 0.0, 'w': 1.0}
+        },
+    })
+
+    return "Goal received"

@@ -13,7 +13,7 @@ function ToolRequest({ isVisible, toolName, onClose }) {
         console.log("Requesting");
         try {
             await axios.post(
-                "http://127.0.0.1:5000/api/map/position", 
+                "http://127.0.0.1:5000/api/map/goal", 
                 coordinates
             );
         } catch (err) {

@@ -45,16 +45,16 @@ function FactoryMap({ currCoordinates }) {
         const lonDiff = bottomRight.lng - topLeft.lng;
 
         // Calculate the percentage of the way through the image coordinates
-        const lat = topLeft.lat + (y / imageHeight) * latDiff;
-        const lon = topLeft.lng + (x / imageWidth) * lonDiff;
+        const lat = topLeft.lat + (x / imageHeight) * latDiff;
+        const lon = topLeft.lng + (y / imageWidth) * lonDiff;
 
         return L.latLng(lat, lon);
     };
 
     // Example waypoints in pixel coordinates
     const waypoints = [
-        { id: 1, position: [351, 181], latlon: pixelToLatLng(351, 181) },
-        { id: 2, position: [142, 419], latlon: pixelToLatLng(142, 419) },
+        { id: 1, position: [181, 351], latlon: pixelToLatLng(181, 351) },
+        { id: 2, position: [419, 142], latlon: pixelToLatLng(419, 142) },
     ];
 
     const handleMarkerClick = (id) => {
