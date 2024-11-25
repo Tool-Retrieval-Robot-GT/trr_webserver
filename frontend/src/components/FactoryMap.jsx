@@ -53,8 +53,8 @@ function FactoryMap({ currCoordinates }) {
 
     // Example waypoints in pixel coordinates
     const waypoints = [
-        { id: 1, position: [181, 351], latlon: pixelToLatLng(181, 351) },
-        { id: 2, position: [419, 142], latlon: pixelToLatLng(419, 142) },
+        { id: 1, position: [530, 700], latlon: pixelToLatLng(530, 700) },
+        { id: 2, position: [460, 430], latlon: pixelToLatLng(460, 430) },
     ];
 
     const handleMarkerClick = (id) => {
@@ -71,8 +71,8 @@ function FactoryMap({ currCoordinates }) {
                     center={[image.height / 2, image.width / 2]}
                     zoom={0}
                     style={{
-                        height: `${image.height}px`,
-                        width: `${image.width}px`,
+                        height: `700px`,
+                        width: `700px`,
                     }}
                     crs={L.CRS.Simple}
                     maxBounds={bounds}
